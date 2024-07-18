@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import authRouters from "./routers/auth.router.js";
+import userRouters from "./routers/user.router.js";
 import sequelize from "./utils/database.js";
 
 dotenv.config();
@@ -28,6 +29,7 @@ sequelize
   });
 
 app.use("/api/auth", authRouters);
+app.use("/api/user", userRouters);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
