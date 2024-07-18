@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Interaction from "./pages/Interaction";
+import Profile from "./pages/Profile";
 // import { lazy } from "react";
 
 // const Contact = lazy(() => import("./pages/Contact"));
@@ -20,6 +21,7 @@ function App() {
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/interaction' element={<Interaction />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
       <FooterComp />
     </BrowserRouter>

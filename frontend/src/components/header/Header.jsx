@@ -153,6 +153,15 @@ function Header() {
 
             <Dropdown.Divider />
 
+            <Link to={"/profile"}>
+              <Dropdown.Item className='text-blue-500 font-semibold'>
+                <ImProfile className='w-4 h-4 mr-2' color='blue' />
+                Setting
+              </Dropdown.Item>
+            </Link>
+
+            <Dropdown.Divider />
+
             <Dropdown.Item
               className='text-red-500 font-semibold'
               onClick={handleSignout}
