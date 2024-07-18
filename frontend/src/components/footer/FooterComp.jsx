@@ -1,5 +1,4 @@
 import {
-  Button,
   Footer,
   FooterCopyright,
   FooterDivider,
@@ -11,6 +10,7 @@ import {
 import { IoMdMail } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { Button } from "../ui/moving-border";
 
 function FooterComp() {
   return (
@@ -90,14 +90,23 @@ function FooterComp() {
                   <div className='flex justify-start items-center'>
                     <TextInput
                       placeholder='Your email'
-                      className='rounded-none'
+                      style={{
+                        borderTopRightRadius: "0",
+                        borderBottomRightRadius: "0",
+                        borderTopLeftRadius: "3px",
+                        borderBottomLeftRadius: "3px",
+                      }}
+                      size='xs'
+                      className='-py-1 -pr-1'
                     />
-                    <Button
-                      borderRadius='4px'
-                      className='bg-black text-white border-slate-800 h-10 rounded-[3px]'
-                    >
-                      Subscribe
-                    </Button>
+                    <div>
+                      <Button
+                        borderRadius='4px'
+                        className='bg-black text-white border-slate-800 h-10 w-20 rounded-[3px]'
+                      >
+                        Subscribe
+                      </Button>
+                    </div>
                   </div>
                 </FooterLink>
               </FooterLinkGroup>

@@ -26,7 +26,8 @@
     "react-router-dom": "^6.25.0",
     "redux-persist": "^6.0.0",
     "styled-components": "^6.1.11",
-    "tailwind-merge": "^2.4.0"
+    "tailwind-merge": "^2.4.0",
+    "tailwind-scrollbar": "^3.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

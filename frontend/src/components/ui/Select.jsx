@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { cn } from "../../utils/cn";
+import { cn } from "../../lib/utils";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 
 const Select = React.forwardRef(({ className, type, ...props }, ref) => {
