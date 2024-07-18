@@ -4,6 +4,10 @@ import sequelize from "../utils/database.js"; // Import your sequelize instance
 const User = sequelize.define(
   "User",
   {
+    fullName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,6 +21,11 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    gender: {
+      type: DataTypes.ENUM("male", "female"),
+      allowNull: true,
+      defaultValue: "male",
+    },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -24,8 +33,6 @@ const User = sequelize.define(
     profilePicture: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue:
-        "https://pics.craiyon.com/2023-07-15/dc2ec5a571974417a5551420a4fb0587.webp ",
     },
   },
   {

@@ -25,6 +25,23 @@ function Header() {
   const { theme } = useSelector((state) => state.theme);
   const { currentUser } = useSelector((state) => state.user);
 
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("/api/auth/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const StyledBadge = styled(Badge)(() => ({
     "& .MuiBadge-badge": {
       backgroundColor: "#44b700",
@@ -127,10 +144,10 @@ function Header() {
               </span>
             </Dropdown.Header>
 
-            <Link to={"/dashboard?tab=dash"}>
+            <Link to={"/interaction"}>
               <Dropdown.Item className='text-blue-500 font-semibold'>
                 <ImProfile className='w-4 h-4 mr-2' color='blue' />
-                Dashboard
+                Chart with Doctors
               </Dropdown.Item>
             </Link>
 
@@ -138,10 +155,7 @@ function Header() {
 
             <Dropdown.Item
               className='text-red-500 font-semibold'
-              onClick={() => {
-                dispatch(signoutSuccess());
-                navigate("/");
-              }}
+              onClick={handleSignout}
             >
               <FaSignOutAlt className='w-4 h-4 mr-2' color='red' />
               Sign out

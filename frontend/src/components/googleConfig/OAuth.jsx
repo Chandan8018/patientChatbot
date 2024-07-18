@@ -21,16 +21,20 @@ export default function OAuth() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: resultsFromGoogle.user.displayName,
+          fullName: resultsFromGoogle.user.displayName,
           email: resultsFromGoogle.user.email,
           googlePhotoUrl: resultsFromGoogle.user.photoURL,
+          gender: "male",
+          username:
+            resultsFromGoogle.user.displayName.split(" ").join("") +
+            Math.random().toString(9).slice(-4),
         }),
       });
 
       const data = await res.json();
       if (res.ok) {
         dispatch(signInSuccess(data));
-        navigate("/dashboard?tab=dash");
+        navigate("/interaction");
       }
     } catch (error) {
       dispatch(signInFailure(error.message));

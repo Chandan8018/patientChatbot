@@ -1,5 +1,6 @@
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
+import { Select } from "../components/ui/Select";
 import { cn } from "../lib/utils";
 import { Spotlight } from "../components/ui/Spotlight";
 import { Button } from "../components/ui/moving-border";
@@ -17,7 +18,7 @@ function SignUp() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
-
+  console.log(formData);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
@@ -25,8 +26,10 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
+      !formData.fullName ||
       !formData.username ||
       !formData.email ||
+      !formData.gender ||
       !formData.password ||
       !formData.confirmpassword
     ) {
@@ -86,10 +89,10 @@ function SignUp() {
         )}
         <form className='mt-4' onSubmit={handleSubmit}>
           <LabelInputContainer>
-            <Label htmlFor='username'>User name</Label>
+            <Label htmlFor='fullName'>Full Name</Label>
             <Input
-              id='username'
-              placeholder='chandan123'
+              id='fullName'
+              placeholder='Full Name'
               type='text'
               onChange={handleChange}
             />
@@ -104,25 +107,44 @@ function SignUp() {
               onChange={handleChange}
             />
           </LabelInputContainer>
-          <LabelInputContainer className='mb-4'>
-            <Label htmlFor='password'>Password</Label>
-            <Input
-              id='password'
-              placeholder='••••••••'
-              type='password'
-              onChange={handleChange}
-            />
-          </LabelInputContainer>
-          <LabelInputContainer className='mb-8'>
-            <Label htmlFor='confirmpassword'>Confirm password</Label>
-            <Input
-              id='confirmpassword'
-              placeholder='••••••••'
-              type='password'
-              onChange={handleChange}
-            />
-          </LabelInputContainer>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+            <LabelInputContainer>
+              <Label htmlFor='username'>User name</Label>
+              <Input
+                id='username'
+                placeholder='chandan123'
+                type='text'
+                onChange={handleChange}
+              />
+            </LabelInputContainer>
 
+            <LabelInputContainer className='mb-4'>
+              <Label htmlFor='gender'>Gender</Label>
+              <Select id='gender' onChange={handleChange}>
+                <option value=''>Select</option>
+                <option value='male'>Male</option>
+                <option value='female'>Female</option>
+              </Select>
+            </LabelInputContainer>
+            <LabelInputContainer className='mb-4'>
+              <Label htmlFor='password'>Password</Label>
+              <Input
+                id='password'
+                placeholder='••••••••'
+                type='password'
+                onChange={handleChange}
+              />
+            </LabelInputContainer>
+            <LabelInputContainer className='mb-8'>
+              <Label htmlFor='confirmpassword'>Confirm password</Label>
+              <Input
+                id='confirmpassword'
+                placeholder='••••••••'
+                type='password'
+                onChange={handleChange}
+              />
+            </LabelInputContainer>
+          </div>
           <Button
             borderRadius='8px'
             className='bg-[#ff5555] dark:bg-blue-400 hover:dark:bg-[#ff5555]  text-white  border-neutral-200 dark:border-slate-800 w-full text-md font-semibold h-12 rounded-[8px] hover:bg-blue-400'

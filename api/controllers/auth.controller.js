@@ -1,35 +1,46 @@
 import User from "../models/user.model.js";
-import bcryptjs from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 // Sign Up
 export const signup = async (req, res, next) => {
-  const { username, email, password } = req.body;
-  console.log(username, email, password);
+  const { fullName, username, gender, email, password } = req.body;
   if (
+    !fullName ||
     !username ||
     !email ||
     !password ||
+    !gender ||
+    fullName === "" ||
     username === "" ||
     email === "" ||
-    password === ""
+    password === "" ||
+    gender === null
   ) {
     return next(errorHandler(400, "All fields are required"));
   }
 
-  // Create hashed password
-  const hashedPassword = bcryptjs.hashSync(password, 10);
-
   try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const profilePic =
+      gender === "male"
+        ? `https://avatar.iran.liara.run/public/boy?username=${username}`
+        : `https://avatar.iran.liara.run/public/girl?username=${username}`;
+
     const newUser = await User.create({
+      fullName,
       username,
       email,
       password: hashedPassword,
+      gender,
+      profilePicture: profilePic,
       isAdmin: false,
     });
 
-    res.status(200).json(newUser);
+    res.status(201).json(newUser);
   } catch (error) {
     next(error);
   }
@@ -49,18 +60,24 @@ export const signin = async (req, res, next) => {
       return next(errorHandler(404, "User not found"));
     }
 
-    const validPassword = bcryptjs.compareSync(password, validUser.password);
+    const validPassword = await bcrypt.compare(password, validUser.password);
     if (!validPassword) {
       return next(errorHandler(400, "Invalid password"));
     }
 
-    const token = jwt.sign({ id: validUser.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: validUser.id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
     const { password: pass, ...rest } = validUser.toJSON();
 
     res
       .status(200)
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access_token", token, {
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+        httpOnly: true, // Prevent XSS
+        sameSite: "strict", // Prevent CSRF
+      })
       .json(rest);
   } catch (error) {
     next(error);
@@ -69,40 +86,72 @@ export const signin = async (req, res, next) => {
 
 // Google Auth
 export const googleAuth = async (req, res, next) => {
-  const { name, email, googlePhotoUrl } = req.body;
+  const { fullName, username, email, googlePhotoUrl, gender } = req.body;
 
   try {
     let user = await User.findOne({ where: { email } });
 
     if (user) {
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+        expiresIn: "1d",
+      });
       const { password, ...rest } = user.toJSON();
       res
         .status(200)
-        .cookie("access_token", token, { httpOnly: true })
+        .cookie("access_token", token, {
+          maxAge: 24 * 60 * 60 * 1000, // 1 day
+          httpOnly: true, // Prevent XSS
+          sameSite: "strict", // Prevent CSRF
+        })
         .json(rest);
     } else {
       const generatedPassword =
         Math.random().toString(36).slice(-8) +
         Math.random().toString(36).slice(-8);
-      const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
 
-      user = await User.create({
-        username:
-          name.split(" ").join("") + Math.random().toString(9).slice(-4),
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(generatedPassword, salt);
+
+      const profilePic =
+        gender === "male"
+          ? `https://avatar.iran.liara.run/public/boy?username=${username}`
+          : `https://avatar.iran.liara.run/public/girl?username=${username}`;
+
+      const user = await User.create({
+        fullName,
+        username,
         email,
         password: hashedPassword,
         profilePicture: googlePhotoUrl,
+        gender,
+        profilePic,
         isAdmin: false,
       });
 
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+        expiresIn: "1d",
+      });
       const { password, ...rest } = user.toJSON();
       res
         .status(200)
-        .cookie("access_token", token, { httpOnly: true })
+        .cookie("access_token", token, {
+          maxAge: 24 * 60 * 60 * 1000, // 1 day
+          httpOnly: true, // Prevent XSS
+          sameSite: "strict", // Prevent CSRF
+        })
         .json(rest);
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const signout = (req, res, next) => {
+  try {
+    res
+      .clearCookie("access_token")
+      .status(200)
+      .json("User has been signed out");
   } catch (error) {
     next(error);
   }
