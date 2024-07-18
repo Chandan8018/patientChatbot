@@ -4,7 +4,7 @@ import { cn } from "../lib/utils";
 import { Spotlight } from "../components/ui/Spotlight";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../components/ui/moving-border";
-import { Word } from "../data/data";
+import { Word } from "../typewriterData/data";
 import { TypewriterEffectSmooth } from "../components/ui/typewriter-effect";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
