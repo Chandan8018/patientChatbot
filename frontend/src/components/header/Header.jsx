@@ -59,7 +59,7 @@ function Header() {
   return (
     <Navbar
       fluid
-      className='bg-gray-400 sticky md:top-3 md:mx-14 md:rounded-full opacity-85 z-40'
+      className='bg-gray-400 dark:bg-[#38626f] sticky md:top-3 md:mx-14 md:rounded-full opacity-85 z-40'
     >
       <NavbarBrand>
         <Link to='/'>

@@ -14,7 +14,7 @@ import { Button } from "../ui/moving-border";
 
 function FooterComp() {
   return (
-    <Footer container className='bg-gray-400 dark:bg-[#1f2937] opacity-85'>
+    <Footer container className='bg-gray-400 dark:bg-[#38626f] opacity-85'>
       <div className='w-full'>
         <div className='grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1'>
           <div className='grid grid-cols-2 md:gap-0 sm:mt-4 md:grid-cols-5 gap-6 '>
