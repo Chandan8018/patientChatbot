@@ -16,13 +16,17 @@
     "@mui/material": "^5.16.4",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@reduxjs/toolkit": "^2.2.6",
+    "@tabler/icons-react": "^3.11.0",
+    "clsx": "^2.1.1",
     "flowbite-react": "^0.10.1",
+    "framer-motion": "^11.3.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
     "react-router-dom": "^6.25.0",
     "redux-persist": "^6.0.0",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "tailwind-merge": "^2.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
