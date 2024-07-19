@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
+import { Op } from "sequelize";
 
 export const updateUser = async (req, res, next) => {
   console.log(req.user.id, req.params.userId);
@@ -62,5 +63,26 @@ export const deleteUser = async (req, res, next) => {
     res.status(200).json("User has been deleted");
   } catch (error) {
     next(error);
+  }
+};
+
+export const getUsersForSidebar = async (req, res) => {
+  try {
+    const loggedInUserId = req.user.id; // Assuming you have middleware that sets req.user
+
+    // Fetch users excluding the logged-in user and without the password field
+    const filteredUsers = await User.findAll({
+      where: {
+        id: {
+          [Op.ne]: loggedInUserId,
+        },
+      },
+      attributes: { exclude: ["password"] },
+    });
+
+    res.status(200).json(filteredUsers);
+  } catch (error) {
+    console.error("Error in getUsersForSidebar: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
