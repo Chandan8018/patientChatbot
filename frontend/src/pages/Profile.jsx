@@ -183,7 +183,7 @@ function Profile() {
       />
       {/* Radial gradient for the container to give a faded look */}
       <div className='absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]'></div>
-      <div className='max-w-3xl w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#abb1bb] dark:bg-[#1a232f] '>
+      <div className='max-w-2xl w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input  dark:bg-[#38626f] bg-purple-500 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20 border border-gray-700 dark:border-gray-100 dark:backdrop-blur-xl dark:bg-opacity-40 dark:backdrop-filter'>
         <div className='flex justify-center'>
           <TypewriterEffectSmooth words={update} />
         </div>
@@ -255,8 +255,8 @@ function Profile() {
               defaultValue={currentUser.email}
             />
           </LabelInputContainer>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-            <LabelInputContainer className='mb-4'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            <LabelInputContainer className='mb-4 col-span-2'>
               <Label htmlFor='userName'>User name</Label>
               <Input
                 id='username'
@@ -267,7 +267,7 @@ function Profile() {
               />
             </LabelInputContainer>
 
-            <LabelInputContainer className='mb-4'>
+            <LabelInputContainer className='mb-4 col-span-1'>
               <Label htmlFor='gender'>Gender</Label>
               <Select
                 id='gender'

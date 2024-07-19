@@ -75,7 +75,7 @@ function SignUp() {
       {/* Radial gradient for the container to give a faded look */}
       <div className='absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]'></div>
       {/* Sign Up Form */}
-      <div className='max-w-3xl w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#abb1bb] dark:bg-[#38626f] '>
+      <div className='max-w-2xl w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input  dark:bg-[#38626f] bg-purple-500 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20 border border-gray-700 dark:border-gray-100 dark:backdrop-blur-xl dark:bg-opacity-40 dark:backdrop-filter'>
         <div className='flex justify-center'>
           <TypewriterEffectSmooth words={Word} />
         </div>
@@ -88,7 +88,7 @@ function SignUp() {
           </Alert>
         )}
         <form className='mt-4' onSubmit={handleSubmit}>
-          <LabelInputContainer>
+          <LabelInputContainer className='mb-4'>
             <Label htmlFor='fullName'>Full Name</Label>
             <Input
               id='fullName'
@@ -107,8 +107,8 @@ function SignUp() {
               onChange={handleChange}
             />
           </LabelInputContainer>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-            <LabelInputContainer>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            <LabelInputContainer className='col-span-2'>
               <Label htmlFor='username'>User name</Label>
               <Input
                 id='username'
@@ -118,7 +118,7 @@ function SignUp() {
               />
             </LabelInputContainer>
 
-            <LabelInputContainer className='mb-4'>
+            <LabelInputContainer className='mb-4 col-span-1'>
               <Label htmlFor='gender'>Gender</Label>
               <Select id='gender' onChange={handleChange}>
                 <option value=''>Select</option>
@@ -126,6 +126,8 @@ function SignUp() {
                 <option value='female'>Female</option>
               </Select>
             </LabelInputContainer>
+          </div>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <LabelInputContainer className='mb-4'>
               <Label htmlFor='password'>Password</Label>
               <Input

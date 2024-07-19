@@ -18,7 +18,7 @@ function FooterComp() {
       <hr className='my-[1px] border-gray-200 dark:border-gray-700' />
       <Footer
         container
-        className='bg-gray-400 dark:bg-[#38626f] opacity-85 rounded-none'
+        className='bg-purple-500 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20 dark:bg-[#38626f] opacity-85 rounded-none'
       >
         <div className='w-full'>
           <div className='grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1'>

@@ -73,8 +73,8 @@ function SignIn() {
       {/* Radial gradient for the container to give a faded look */}
       <div className='absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]'></div>
       {/* Log In Form */}
-      <div className='max-w-3xl w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#abb1bb] dark:bg-[#38626f] '>
-        <div className='flex justify-center'>
+      <div className='max-w-2xl w-full mx-auto h-full md:rounded-2xl p-4 md:p-8 shadow-input  dark:bg-[#38626f] bg-purple-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20 border border-gray-700 dark:border-gray-100 dark:backdrop-blur-xl dark:bg-opacity-40 dark:backdrop-filter'>
+        <div className='flex justify-center '>
           <TypewriterEffectSmooth words={Word} />
         </div>
 
