@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "chandan",
+    "password": "Chandan@143",
+    "database": "chatbotDB",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "chandan",
+    "password": "Chandan@143",
+    "database": "chatbotDB",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "chandan",
+    "password": "Chandan@143",
+    "database": "chatbotDB",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
