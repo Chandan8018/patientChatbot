@@ -1,4 +1,5 @@
 const flowbite = require("flowbite-react/tailwind");
+import daisyui from "daisyui";
 const svgToDataUri = require("mini-svg-data-uri");
 const flattenColorPalette =
   require("tailwindcss/lib/util/flattenColorPalette").default;
@@ -29,6 +30,7 @@ export default {
     },
   },
   plugins: [
+    daisyui,
     flowbite.plugin(),
     require("tailwind-scrollbar")({ nocompatible: true }),
     addVariablesForColors,

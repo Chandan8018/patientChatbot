@@ -11,12 +11,13 @@ import { FaMoon, FaSignOutAlt, FaSun, FaUserCheck } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../../redux/theme/themeSlice";
 import { Button } from "../ui/moving-border";
-import { ImProfile } from "react-icons/im";
+import { MdChat } from "react-icons/md";
 import { signoutSuccess } from "../../redux/user/userSlice";
 import { Avatar } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import { IoIosMail } from "react-icons/io";
+import { IoSettings } from "react-icons/io5";
 
 function Header() {
   const path = useLocation().pathname;
@@ -145,17 +146,17 @@ function Header() {
             </Dropdown.Header>
 
             <Link to={"/interaction"}>
-              <Dropdown.Item className='text-blue-500 font-semibold'>
-                <ImProfile className='w-4 h-4 mr-2' color='blue' />
-                Chart with Doctors
+              <Dropdown.Item className='text-gray-700 font-bold'>
+                <MdChat className='w-5 h-5 mr-2' color='gray' />
+                Query with Doctors
               </Dropdown.Item>
             </Link>
 
             <Dropdown.Divider />
 
             <Link to={"/profile"}>
-              <Dropdown.Item className='text-blue-500 font-semibold'>
-                <ImProfile className='w-4 h-4 mr-2' color='blue' />
+              <Dropdown.Item className='text-gray-700 font-bold'>
+                <IoSettings className='w-5 h-5 mr-2' color='gray' />
                 Setting
               </Dropdown.Item>
             </Link>
