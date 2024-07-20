@@ -21,7 +21,7 @@ export const SocketContextProvider = ({ children }) => {
   console.log(onlineUsers);
   useEffect(() => {
     if (currentUser) {
-      const socket = io("/api", {
+      const socket = io("#", {
         query: {
           userId: currentUser.id,
         },
