@@ -30,6 +30,7 @@ export default {
     },
   },
   plugins: [
+    require("tailwind-scrollbar"),
     daisyui,
     flowbite.plugin(),
     require("tailwind-scrollbar")({ nocompatible: true }),

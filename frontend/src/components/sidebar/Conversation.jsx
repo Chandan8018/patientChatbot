@@ -1,38 +1,13 @@
-import io from "socket.io-client";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import useConversation from "../../zustand/useConversation";
+import { useSocketContext } from "../../context/SocketContext";
 
 const Conversation = ({ conversation, lastIdx, emoji }) => {
-  const [socket, setSocket] = useState(null);
-  const [onlineUsers, setOnlineUsers] = useState([]);
   const { currentUser } = useSelector((state) => state.user);
   const { selectedConversation, setSelectedConversation } = useConversation();
   const isSelected = selectedConversation?.id === conversation.id;
-  const isOnline = onlineUsers.includes(conversation.id);
-
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     const socket = io("http://localhost:5173/", {
-  //       query: {
-  //         userId: currentUser.id,
-  //       },
-  //     });
-  //     console.log(socket);
-  //     setSocket(socket);
-
-  //     socket.on("getOnlineUsers", (users) => {
-  //       setOnlineUsers(users);
-  //     });
-
-  //     return () => socket.close();
-  //   } else {
-  //     if (socket) {
-  //       socket.close();
-  //       setSocket(null);
-  //     }
-  //   }
-  // }, [currentUser]);
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(conversation._id);
 
   return currentUser.isAdmin
     ? !conversation.isAdmin && (

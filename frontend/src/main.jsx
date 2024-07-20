@@ -7,19 +7,19 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import ThemeProvider from "./components/theme/ThemeProvider";
 import { SocketContextProvider } from "./context/SocketContext.jsx";
-import { AuthContextProvider } from "./context/AuthContext.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <PersistGate loading={null} persistor={persistor}>
     <Provider store={store}>
       <ThemeProvider>
-        <AuthContextProvider>
-          <SocketContextProvider>
+        <SocketContextProvider>
+          <ErrorBoundary>
             <React.StrictMode>
               <App />
             </React.StrictMode>
-          </SocketContextProvider>
-        </AuthContextProvider>
+          </ErrorBoundary>
+        </SocketContextProvider>
       </ThemeProvider>
     </Provider>
   </PersistGate>

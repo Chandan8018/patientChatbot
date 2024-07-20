@@ -1,37 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useConversation from "../zustand/useConversation";
-import io from "socket.io-client";
+
 import notificationSound from "../assets/sounds/notification.mp3";
-import { useSelector } from "react-redux";
+import { useSocketContext } from "../context/SocketContext";
 
 const useListenMessages = () => {
-  const [socket, setSocket] = useState(null);
-  const [onlineUsers, setOnlineUsers] = useState([]);
-  const { currentUser } = useSelector((state) => state.user);
+  const { socket } = useSocketContext();
   const { messages, setMessages } = useConversation();
-
-  useEffect(() => {
-    if (currentUser) {
-      const socket = io("http://localhost:5173/", {
-        query: {
-          userId: currentUser.id,
-        },
-      });
-      console.log(socket);
-      setSocket(socket);
-
-      socket.on("getOnlineUsers", (users) => {
-        setOnlineUsers(users);
-      });
-
-      return () => socket.close();
-    } else {
-      if (socket) {
-        socket.close();
-        setSocket(null);
-      }
-    }
-  }, [currentUser]);
 
   useEffect(() => {
     socket?.on("newMessage", (newMessage) => {

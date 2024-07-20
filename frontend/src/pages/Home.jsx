@@ -1,6 +1,8 @@
 import React from "react";
 import { ContainerScroll } from "../components/ui/container-scroll-animation";
 import homeImg from "../assets/home.jpg";
+import { TypewriterEffectSmooth } from "../components/ui/typewriter-effect";
+import { home } from "../typewriterData/data";
 
 function Home() {
   return (
@@ -9,9 +11,10 @@ function Home() {
         titleComponent={
           <>
             <h1 className='text-4xl font-semibold text-black dark:text-white'>
-              <span className='text-4xl md:text-[6rem] font-bold mt-1 leading-none'>
-                Scroll Animations
-              </span>
+              get started <br />
+              <div className='flex justify-center'>
+                <TypewriterEffectSmooth words={home} />
+              </div>
             </h1>
           </>
         }

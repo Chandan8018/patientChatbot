@@ -1,6 +1,11 @@
-import { createContext, useState, useEffect, useContext } from "react";
-import { useAuthContext } from "./AuthContext";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
+import {
+  setSocket,
+  setOnlineUsers,
+  disconnectSocket,
+} from "../redux/socket/socketSlice";
 
 const SocketContext = createContext();
 
@@ -9,15 +14,16 @@ export const useSocketContext = () => {
 };
 
 export const SocketContextProvider = ({ children }) => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
-  const { authUser } = useAuthContext();
-
+  console.log(onlineUsers);
   useEffect(() => {
-    if (authUser) {
-      const socket = io("https://chat-app-yt.onrender.com", {
+    if (currentUser) {
+      const socket = io("/api", {
         query: {
-          userId: authUser.id,
+          userId: currentUser.id,
         },
       });
 
@@ -35,7 +41,7 @@ export const SocketContextProvider = ({ children }) => {
         setSocket(null);
       }
     }
-  }, [authUser]);
+  }, [currentUser]);
 
   return (
     <SocketContext.Provider value={{ socket, onlineUsers }}>

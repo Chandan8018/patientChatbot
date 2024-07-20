@@ -7,22 +7,19 @@ import { useState } from "react";
 import { Dropdown } from "flowbite-react";
 import { Avatar } from "@mui/material";
 import { IoIosMail } from "react-icons/io";
-import { IoSettings } from "react-icons/io5";
-import { MdChat } from "react-icons/md";
-import { Link } from "react-router-dom";
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
-  const [profileDropdown, setProfileDropdown] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
-    <div className='md:min-w-[450px] h-96 md:h-full flex flex-col justify-between'>
+    <div className='md:min-w-[450px] h-96 md:h-[92vh] flex flex-col justify-between'>
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
         <>
           {/* Header */}
-          <div className='bg-gray-400 dark:bg-slate-500 px-4 py-2 mb-2 flex justify-start items-center gap-2'>
+          <div className='bg-gray-400 dark:bg-slate-500 px-4 py-2 mb-2 flex justify-start items-center gap-2 mt-2'>
             {selectedConversation &&
               (selectedConversation.isAdmin ? (
                 <Dropdown
@@ -86,7 +83,11 @@ const NoChatSelected = () => {
     <div className='flex items-center justify-center w-full h-full'>
       <div className='px-4 text-center sm:text-lg md:text-xl text-gray-600 dark:text-gray-200 font-semibold flex flex-col items-center gap-2'>
         <p>Welcome 👋 {currentUser.fullName} ❄</p>
-        <p>Select a doctor to start health inquiries</p>
+        <p>
+          {currentUser.isAdmin
+            ? "Select a patient to slove health inquiries"
+            : "Select a doctor to start health inquiries"}
+        </p>
         <TiMessages className='text-3xl md:text-6xl text-center' />
       </div>
     </div>

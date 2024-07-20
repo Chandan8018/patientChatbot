@@ -18,6 +18,7 @@ import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import { IoIosMail } from "react-icons/io";
 import { IoSettings } from "react-icons/io5";
+import logo from "../../assets/logo.png";
 
 function Header() {
   const path = useLocation().pathname;
@@ -81,14 +82,7 @@ function Header() {
     >
       <NavbarBrand>
         <Link to='/'>
-          <span className='flex justify-start items-center whitespace-nowrap text-xl font-semibold dark:text-white md:pl-7'>
-            <span className='bg-blue-500 dark:bg-[#ff5555] rounded-xl rounded-tr-none rounded-br-none py-1 px-1 text-xl font-bold'>
-              ABC
-            </span>{" "}
-            <span className='bg-[#ff5555] dark:bg-blue-500 rounded-xl rounded-tl-none rounded-bl-none py-1 px-1 text-xl font-bold'>
-              INVOICE
-            </span>
-          </span>
+          <img src={logo} alt='logo' className='h-12 w-14 md:ml-6' />
         </Link>
       </NavbarBrand>
       <div className='flex gap-5 md:order-2 md:pr-10'>
@@ -148,7 +142,9 @@ function Header() {
             <Link to={"/interaction"}>
               <Dropdown.Item className='text-gray-700 font-bold'>
                 <MdChat className='w-5 h-5 mr-2' color='gray' />
-                Query with Doctors
+                {currentUser.isAdmin
+                  ? "Chat with Patient"
+                  : "Query with Doctors"}
               </Dropdown.Item>
             </Link>
 

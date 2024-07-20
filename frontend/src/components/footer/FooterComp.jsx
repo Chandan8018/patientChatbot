@@ -11,6 +11,7 @@ import { IoMdMail } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/moving-border";
+import logo from "../../assets/logo.png";
 
 function FooterComp() {
   return (
@@ -26,19 +27,12 @@ function FooterComp() {
               <div className='flex flex-col gap-6 mt-2'>
                 <div className='flex justify-start items-center'>
                   <Link to='/'>
-                    <span className='flex justify-start items-center whitespace-nowrap text-xl font-semibold dark:text-white pl-7'>
-                      <span className='bg-blue-500 dark:bg-[#ff5555] rounded-xl rounded-tr-none rounded-br-none py-1 px-1 text-xl font-bold'>
-                        ABC
-                      </span>{" "}
-                      <span className='bg-[#ff5555] dark:bg-blue-500 rounded-xl rounded-tl-none rounded-bl-none py-1 px-1 text-xl font-bold'>
-                        INVOICE
-                      </span>
-                    </span>
+                    <img src={logo} alt='logo' className='h-16 w-20' />
                   </Link>
                 </div>
                 <span className='flex justify-start items-center gap-1 text-sm font-semibold'>
                   <IoMdMail className='w-6 h-6 text-[#ff5555]' />{" "}
-                  Help@AbcInvoice.In
+                  Help@chatBot.In
                 </span>
                 <span className='flex justify-start items-center gap-1 text-sm font-semibold'>
                   <IoCall className='w-6 h-6 text-[#ff5555]' />{" "}
@@ -122,7 +116,7 @@ function FooterComp() {
           <div className='w-full flex items-center justify-center'>
             <FooterCopyright
               href='#'
-              by='AbcInvoice.In All Rights Reserved™'
+              by='ChatBot.In All Rights Reserved™'
               year={new Date().getFullYear()}
               className='text-black dark:text-white'
             />

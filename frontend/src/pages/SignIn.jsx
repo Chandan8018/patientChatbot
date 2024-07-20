@@ -15,7 +15,6 @@ import {
 } from "../redux/user/userSlice";
 import { Alert, Spinner } from "flowbite-react";
 import OAuth from "../components/googleConfig/OAuth";
-import { useAuthContext } from "../context/AuthContext";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ function SignIn() {
   const { currentUser } = useSelector((state) => state.user);
   const userState = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
-  const { setAuthUser } = useAuthContext();
 
   const { loading, error: errorMessage } = userState || {
     loading: false,
@@ -59,9 +57,7 @@ function SignIn() {
 
       if (res.ok) {
         dispatch(signInSuccess(data));
-        localStorage.setItem("chat-user", JSON.stringify(data));
-        setAuthUser(data);
-        navigate("/dashboard?tab=dash");
+        navigate("/interaction");
       }
     } catch (error) {
       dispatch(signInFailure(error.message));
@@ -83,9 +79,9 @@ function SignIn() {
         </div>
 
         <div className='flex flex-col gap-2 text-md font-medium border-solid border-2 rounded-md p-2'>
-          <span>Demo Account:</span>
-          <span>email: demo@gmail.com</span>
-          <span>password: demo@123</span>
+          <span>Demo Account for Doctor:</span>
+          <span>email: demo.doctor@gmai.com</span>
+          <span>password: demo123</span>
         </div>
 
         {errorMessage && (
