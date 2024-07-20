@@ -65,9 +65,13 @@ export const signin = async (req, res, next) => {
       return next(errorHandler(400, "Invalid password"));
     }
 
-    const token = jwt.sign({ id: validUser.id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign(
+      { id: validUser.id, isAdmin: validUser.isAdmin },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      }
+    );
 
     const { password: pass, ...rest } = validUser.toJSON();
 
@@ -92,9 +96,13 @@ export const googleAuth = async (req, res, next) => {
     let user = await User.findOne({ where: { email } });
 
     if (user) {
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-        expiresIn: "1d",
-      });
+      const token = jwt.sign(
+        { id: user.id, isAdmin: user.isAdmin },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1d",
+        }
+      );
       const { password, ...rest } = user.toJSON();
       res
         .status(200)
@@ -128,9 +136,13 @@ export const googleAuth = async (req, res, next) => {
         isAdmin: false,
       });
 
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-        expiresIn: "1d",
-      });
+      const token = jwt.sign(
+        { id: user.id, isAdmin: user.isAdmin },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1d",
+        }
+      );
       const { password, ...rest } = user.toJSON();
       res
         .status(200)

@@ -44,6 +44,7 @@ function Profile() {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({});
   const filePickerRef = useRef();
+  console.log(formData);
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -280,6 +281,53 @@ function Profile() {
               </Select>
             </LabelInputContainer>
           </div>
+
+          {currentUser.isAdmin && (
+            <div className='grid grid-cols-5 gap-4'>
+              <LabelInputContainer className='mb-4 col-span-3'>
+                <Label htmlFor='profession'>Profession</Label>
+                <Select
+                  id='profession'
+                  defaultValue={currentUser.profession}
+                  onChange={handleChange}
+                >
+                  <option value=''>Select</option>
+                  <option value='Cardiology'>Cardiology</option>
+                  <option value='Oncology'>Oncology</option>
+                  <option value='Neurology'>Neurology</option>
+                  <option value='Orthopedics'>Orthopedics</option>
+                  <option value='Pediatrics'>Pediatrics</option>
+                  <option value='Radiology'>Radiology</option>
+                  <option value='Surgery'>Surgery</option>
+                  <option value='Psychiatry'>Psychiatry</option>
+                  <option value='Ophthalmology'>Ophthalmology</option>
+                  <option value='Hematology'>Hematology</option>
+                  <option value='Rheumatology'>Rheumatology</option>
+                  <option value='Dermatology'>Dermatology</option>
+                  <option value='Pulmonology'>Pulmonology</option>
+                  <option value='Urology'>Urology</option>
+                  <option value='Nephrology'>Nephrology</option>
+                  <option value='Endocrinology'>Endocrinology</option>
+                  <option value='Gastroenterology'>Gastroenterology</option>
+                  <option value='Others'>Others</option>
+                </Select>
+              </LabelInputContainer>
+
+              <LabelInputContainer className='mb-4 col-span-2'>
+                <Label htmlFor='exp'>Experience</Label>
+                <Input
+                  id='exp'
+                  placeholder='User Name'
+                  type='number'
+                  defaultValue={currentUser.exp}
+                  onChange={handleChange}
+                  min='1'
+                  max='15'
+                />
+              </LabelInputContainer>
+            </div>
+          )}
+
           <LabelInputContainer className='mb-8'>
             <Label htmlFor='password'>Password</Label>
             <Input

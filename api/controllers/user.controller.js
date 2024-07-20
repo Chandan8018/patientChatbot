@@ -4,7 +4,6 @@ import { errorHandler } from "../utils/error.js";
 import { Op } from "sequelize";
 
 export const updateUser = async (req, res, next) => {
-  console.log(req.user.id, req.params.userId);
   if (req.user.id != req.params.userId) {
     return next(errorHandler(403, "You are not allowed to update this user"));
   }
@@ -36,7 +35,10 @@ export const updateUser = async (req, res, next) => {
   if (req.body.profilePicture)
     updateData.profilePicture = req.body.profilePicture;
   if (req.body.gender) updateData.gender = req.body.gender;
-
+  if (req.user.isAdmin && req.body.profession)
+    updateData.profession = req.body.profession;
+  if (req.user.isAdmin && req.body.exp) updateData.exp = req.body.exp;
+  if (req.user.isAdmin && req.body.bio) updateData.bio = req.body.bio;
   try {
     const updatedUser = await User.findByPk(req.params.userId);
     if (!updatedUser) {

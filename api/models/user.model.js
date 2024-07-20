@@ -35,6 +35,18 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    profession: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    exp: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    bio: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     timestamps: true,
