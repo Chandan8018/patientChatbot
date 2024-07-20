@@ -16,52 +16,60 @@ const MessageContainer = () => {
   const [profileDropdown, setProfileDropdown] = useState(false);
 
   return (
-    <div className='md:min-w-[450px] flex flex-col'>
+    <div className='md:min-w-[450px] h-96 md:h-full flex flex-col justify-between'>
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
         <>
           {/* Header */}
           <div className='bg-gray-400 dark:bg-slate-500 px-4 py-2 mb-2 flex justify-start items-center gap-2'>
-            {selectedConversation && (
-              <Dropdown
-                arrowIcon={false}
-                inline
-                label={
-                  <Avatar
-                    alt={selectedConversation.username}
-                    src={selectedConversation.profilePicture}
-                    sx={{ width: 35, height: 35 }}
-                  />
-                }
-              >
-                <Dropdown.Header>
-                  <div className='flex justify-start items-center gap-2'>
-                    <span className='block text-md font-bold text-blue-500 truncate'>
-                      Dr. {selectedConversation.fullName}
+            {selectedConversation &&
+              (selectedConversation.isAdmin ? (
+                <Dropdown
+                  arrowIcon={false}
+                  inline
+                  label={
+                    <Avatar
+                      alt={selectedConversation.username}
+                      src={selectedConversation.profilePicture}
+                      sx={{ width: 35, height: 35 }}
+                    />
+                  }
+                >
+                  <Dropdown.Header>
+                    <div className='flex justify-start items-center gap-2'>
+                      <span className='block text-md font-bold text-blue-500 truncate'>
+                        {selectedConversation.exp >= 5 ? "Professor." : "Dr."}{" "}
+                        {selectedConversation.fullName}
+                      </span>
+                    </div>
+                    <span className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate mt-2 flex justify-start items-center gap-1'>
+                      <IoIosMail className='w-6 h-6 pt-1' />
+                      {selectedConversation.email}
                     </span>
-                  </div>
-                  <span className='text-sm font-medium text-gray-500 dark:text-gray-400 truncate mt-2 flex justify-start items-center gap-1'>
-                    <IoIosMail className='w-6 h-6 pt-1' />
-                    {selectedConversation.email}
-                  </span>
-                </Dropdown.Header>
+                  </Dropdown.Header>
 
-                <Dropdown.Item className='text-gray-700 font-bold'>
-                  <MdChat className='w-5 h-5 mr-2' color='gray' />
-                  Query with Doctors
-                </Dropdown.Item>
+                  <Dropdown.Item className='text-gray-700 '>
+                    👔 {selectedConversation.profession} Department
+                  </Dropdown.Item>
 
-                <Dropdown.Divider />
+                  <Dropdown.Divider />
 
-                <Dropdown.Item className='text-gray-700 font-bold'>
-                  <IoSettings className='w-5 h-5 mr-2' color='gray' />
-                  Setting
-                </Dropdown.Item>
-              </Dropdown>
-            )}
+                  <Dropdown.Item className='text-gray-700 '>
+                    ✍🏻 {selectedConversation.bio}
+                  </Dropdown.Item>
+                </Dropdown>
+              ) : (
+                <Avatar
+                  alt={selectedConversation.username}
+                  src={selectedConversation.profilePicture}
+                  sx={{ width: 35, height: 35 }}
+                />
+              ))}
             <span className='text-gray-900 font-bold'>
-              Dr. {selectedConversation.fullName}
+              {selectedConversation.isAdmin &&
+                (selectedConversation.exp >= 5 ? "Professor. " : "Dr. ")}
+              {selectedConversation.fullName}
             </span>
           </div>
           <Messages />

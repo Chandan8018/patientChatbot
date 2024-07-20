@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { Select } from "../components/ui/Select";
+import { TextArea } from "../components/ui/TextArea";
 import { cn } from "../lib/utils.js";
 import { Spotlight } from "../components/ui/Spotlight";
 import { Button } from "../components/ui/moving-border.jsx";
@@ -28,6 +29,8 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase.js";
 import { CircularProgressbar } from "react-circular-progressbar";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function Profile() {
   const navigate = useNavigate();
@@ -177,7 +180,7 @@ function Profile() {
   };
 
   return (
-    <div className='h-[65rem] w-full dark:bg-black bg-white dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex items-center justify-center'>
+    <div className=' w-full dark:bg-black bg-white dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex items-center justify-center py-6'>
       <Spotlight
         className='-top-40 left-0 md:left-60 md:-top-20 z-10'
         fill={theme === "dark" ? "white" : "#13C6F7"}
@@ -317,12 +320,23 @@ function Profile() {
                 <Label htmlFor='exp'>Experience</Label>
                 <Input
                   id='exp'
-                  placeholder='User Name'
+                  placeholder='Enter your exp...'
                   type='number'
                   defaultValue={currentUser.exp}
                   onChange={handleChange}
                   min='1'
                   max='15'
+                />
+              </LabelInputContainer>
+
+              <LabelInputContainer className='mb-4 col-span-full'>
+                <Label htmlFor='bio'>Bio</Label>
+                <TextArea
+                  id='bio'
+                  placeholder='Enter your bio...'
+                  type='text'
+                  defaultValue={currentUser.bio}
+                  onChange={handleChange}
                 />
               </LabelInputContainer>
             </div>

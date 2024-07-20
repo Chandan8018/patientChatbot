@@ -37,7 +37,7 @@ const MessageInput = () => {
       <div className='w-full relative'>
         <input
           type='text'
-          className='border text-sm rounded-lg block w-full p-2.5 bg-gray-300 dark:bg-gray-700 border-gray-600 text-white'
+          className='border text-sm rounded-lg block w-full p-2.5 bg-gray-300 dark:bg-gray-700 border-gray-600'
           placeholder='Send a message'
           onChange={(e) =>
             setFormData({ ...formData, message: e.target.value })
